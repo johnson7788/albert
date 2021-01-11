@@ -21,11 +21,11 @@ from __future__ import division
 from __future__ import print_function
 import collections
 import random
-from albert import tokenization
+import tokenization
 import numpy as np
 import six
-from six.moves import range
-from six.moves import zip
+# from six.moves import range
+# from six.moves import zip
 import tensorflow.compat.v1 as tf
 
 flags = tf.flags
@@ -33,64 +33,60 @@ flags = tf.flags
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string("input_file", None,
-                    "Input raw text file (or comma-separated list of files).")
+                    "输入的raw text文件，或者用冒号隔开的文件多个文件")
 
 flags.DEFINE_string(
     "output_file", None,
-    "Output TF example file (or comma-separated list of files).")
+    "输入出的TF文件，或者用冒号隔开的多个文件")
 
 flags.DEFINE_string(
     "vocab_file", None,
-    "The vocabulary file that the ALBERT model was trained on.")
+    "ALBERT模型的单词表文件")
 
 flags.DEFINE_string("spm_model_file", None,
-                    "The model file for sentence piece tokenization.")
+                    "sentence piece tokenization的模型文件")
 
 flags.DEFINE_string("input_file_mode", "r",
-                    "The data format of the input file.")
+                    "输入文件的文件格式")
 
 flags.DEFINE_bool(
     "do_lower_case", True,
-    "Whether to lower case the input text. Should be True for uncased "
-    "models and False for cased models.")
+    "是否小写输入文本。 对于uncased模型，应为True；对于cased模型，应为False。 ")
 
 flags.DEFINE_bool(
     "do_whole_word_mask", True,
-    "Whether to use whole word masking rather than per-WordPiece masking.")
+    "是否使用全词mask而不是每个WordPiece mask。")
 
 flags.DEFINE_bool(
     "do_permutation", False,
-    "Whether to do the permutation training.")
+    "是否进行排列训练。")
 
 flags.DEFINE_bool(
     "favor_shorter_ngram", True,
-    "Whether to set higher probabilities for sampling shorter ngrams.")
+    "是否设置较高的概率对较短的ngram进行采样。")
 
 flags.DEFINE_bool(
     "random_next_sentence", False,
-    "Whether to use the sentence that's right before the current sentence "
-    "as the negative sample for next sentence prection, rather than using "
-    "sentences from other random documents.")
+    "是否使用当前句子之前的句子作为下一个句子预测的负样本，而不是使用其他随机文档中的句子。 ")
 
-flags.DEFINE_integer("max_seq_length", 512, "Maximum sequence length.")
+flags.DEFINE_integer("max_seq_length", 512, "最大序列长度。")
 
-flags.DEFINE_integer("ngram", 3, "Maximum number of ngrams to mask.")
+flags.DEFINE_integer("ngram", 3, "要masked的最大ngram数。")
 
 flags.DEFINE_integer("max_predictions_per_seq", 20,
-                     "Maximum number of masked LM predictions per sequence.")
+                     "每个序列的最大masked LM预测数。")
 
-flags.DEFINE_integer("random_seed", 12345, "Random seed for data generation.")
+flags.DEFINE_integer("random_seed", 12345, "用于数据生成的随机种子。 ")
 
 flags.DEFINE_integer(
     "dupe_factor", 40,
-    "Number of times to duplicate the input data (with different masks).")
+    "复制输入数据的次数(使用不同的mask)。 ")
 
-flags.DEFINE_float("masked_lm_prob", 0.15, "Masked LM probability.")
+flags.DEFINE_float("masked_lm_prob", 0.15, "被masked的LM概率。 ")
 
 flags.DEFINE_float(
     "short_seq_prob", 0.1,
-    "Probability of creating sequences which are shorter than the "
-    "maximum length.")
+    "创建比最大长度短的序列的可能性。 ")
 
 
 class TrainingInstance(object):

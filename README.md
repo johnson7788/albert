@@ -93,6 +93,44 @@ setup:
 |ALBERT (1M)               | 94.8/89.2     | 89.9/87.2     | -             | 86.0 (88.2/85.1)        |
 |ALBERT (1.5M)             | **94.8/89.3** | **90.2/87.4** | **90.9/88.1** | **86.5 (89.0/85.5)**    |
 
+# 目录结构
+albert
+```buildoutcfg
+├── CONTRIBUTING.md
+├── LICENSE
+├── README.md
+├── albert_glue_fine_tuning_tutorial.ipynb      glue的colab微调脚本
+├── classifier_utils.py          分类的utils函数
+├── create_pretraining_data.py   创建预训练数据
+├── export_checkpoints.py      导出checkpoints
+├── export_to_tfhub.py          导出到tfhub
+├── fine_tuning_utils.py          微调的utils
+├── lamb_optimizer.py           lamb优化器
+├── modeling.py                 albert模型
+├── modeling_test.py             albert模型测试脚本
+├── optimization.py              优化器
+├── optimization_test.py
+├── race_utils.py               race数据集utils
+├── requirements.txt            依赖包
+├── run_classifier.py           通用分类脚本
+├── run_glue.sh
+├── run_pretraining.py          训练预训练模型
+├── run_pretraining_test.py
+├── run_race.py
+├── run_squad_v1.py
+├── run_squad_v2.py
+├── run_trivial_model_test.sh
+├── squad_utils.py
+├── tokenization.py               tokenizer
+├── tokenization_test.py
+
+```
+
+# 依赖包
+```buildoutcfg
+python 3.7
+pip install -r requirement.txt
+```
 
 Pre-trained Models
 ==================

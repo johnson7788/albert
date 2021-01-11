@@ -117,3 +117,4 @@ dmypy.json
 *.gz
 venv
 output
+data
