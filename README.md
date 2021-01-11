@@ -7,28 +7,29 @@ Add a colab [tutorial](https://github.com/google-research/albert/blob/master/alb
 
 ***************New January 7, 2020 ***************
 
-v2 TF-Hub models should be working now with TF 1.15, as we removed the
-native Einsum op from the graph. See updated TF-Hub links below.
+v2 TF-Hub模型现在应该可以在TF 1.15上使用，因为我们从图中删除了局部Einsum op。 请参阅下面的更新的TF-Hub链接。
+
 
 ***************New December 30, 2019 ***************
 
-Chinese models are released. We would like to thank [CLUE team ](https://github.com/CLUEbenchmark/CLUE) for providing the training data.
+中文模型发布。 感谢[CLUE team ](https://github.com/CLUEbenchmark/CLUE)提供的训练数据。是v1版本的。
 
 - [Base](https://storage.googleapis.com/albert_models/albert_base_zh.tar.gz)
 - [Large](https://storage.googleapis.com/albert_models/albert_large_zh.tar.gz)
 - [Xlarge](https://storage.googleapis.com/albert_models/albert_xlarge_zh.tar.gz)
 - [Xxlarge](https://storage.googleapis.com/albert_models/albert_xxlarge_zh.tar.gz)
 
-Version 2 of ALBERT models is released.
+ALBERT模型的版本2已发布。 
 
 - Base: [[Tar file](https://storage.googleapis.com/albert_models/albert_base_v2.tar.gz)] [[TF-Hub](https://tfhub.dev/google/albert_base/3)]
 - Large: [[Tar file](https://storage.googleapis.com/albert_models/albert_large_v2.tar.gz)] [[TF-Hub](https://tfhub.dev/google/albert_large/3)]
 - Xlarge: [[Tar file](https://storage.googleapis.com/albert_models/albert_xlarge_v2.tar.gz)] [[TF-Hub](https://tfhub.dev/google/albert_xlarge/3)]
 - Xxlarge: [[Tar file](https://storage.googleapis.com/albert_models/albert_xxlarge_v2.tar.gz)] [[TF-Hub](https://tfhub.dev/google/albert_xxlarge/3)]
 
-In this version, we apply 'no dropout', 'additional training data' and 'long training time' strategies to all models. We train ALBERT-base for 10M steps and other models for 3M steps.
+在此版本中，我们对所有模型应用“无dropout”，“其他训练数据”和“长时间训练”策略。 我们训练基于ALBERT的10M步，训练其他模型3M的步。
 
-The result comparison to the v1 models is as followings:
+与v1模型的结果比较如下： 
+
 
 |                | Average  | SQuAD1.1 | SQuAD2.0 | MNLI     | SST-2    | RACE     |
 |----------------|----------|----------|----------|----------|----------|----------|
@@ -43,14 +44,18 @@ The result comparison to the v1 models is as followings:
 |ALBERT-xlarge   |85.5      |92.5/86.1 | 86.1/83.1|86.4      |92.4      | 74.8     |
 |ALBERT-xxlarge  |91.0      |94.8/89.3 | 90.2/87.4|90.8      |96.9      | 86.5     |
 
-The comparison shows that for ALBERT-base, ALBERT-large, and ALBERT-xlarge, v2 is much better than v1, indicating the importance of applying the above three strategies. On average, ALBERT-xxlarge is slightly worse than the v1, because of the following two reasons: 1) Training additional 1.5 M steps (the only difference between these two models is training for 1.5M steps and 3M steps) did not lead to significant performance improvement. 2) For v1, we did a little bit hyperparameter search among the parameters sets given by BERT, Roberta, and XLnet. For v2, we simply adopt the parameters from v1 except for RACE, where we use a learning rate of 1e-5 and 0 [ALBERT DR](https://arxiv.org/pdf/1909.11942.pdf) (dropout rate for ALBERT in finetuning). The original (v1) RACE hyperparameter will cause model divergence for v2 models. Given that the downstream tasks are sensitive to the fine-tuning hyperparameters, we should be careful about so called slight improvements.
+比较表明，对于基于ALBERT的，ALBERT-large的和ALBERT-xlarge的，v2优于v1，表明应用以上三种策略的重要性。 
+平均而言，由于以下两个原因，ALBERT-xxlarge比v1稍差：
+1)训练额外的1.5M步(这两个模型之间的唯一区别是训练1.5M步和3M步)并没有带来明显的性能改进。 
+2)对于v1，我们在BERT，Roberta和XLnet给定的参数集中进行了一些超参数搜索。 
+对于v2，我们仅采用v1中的参数，除了RACE，我们使用的学习率是1e-5和0 [ALBERT DR](https://arxiv.org/pdf/1909.11942.pdf) (ALBERT的dropout rate 微调)。
+原始(v1)RACE超参数将导致v2模型的模型分歧。 鉴于下游任务对微调超参数敏感，因此我们应谨慎对待所谓的细微改进。 
 
-ALBERT is "A Lite" version of BERT, a popular unsupervised language
-representation learning algorithm. ALBERT uses parameter-reduction techniques
-that allow for large-scale configurations, overcome previous memory limitations,
-and achieve better behavior with respect to model degradation.
+ALBERT是BERT的“精简版”版本，它是一种流行的无监督语言表示学习算法。 
+ALBERT使用参数缩减技术，可进行大规模配置，克服先前的内存限制并在模型降级方面实现更好的性能。 
 
-For a technical description of the algorithm, see our paper:
+
+有关该算法的技术说明，请参见我们的论文： 
 
 [ALBERT: A Lite BERT for Self-supervised Learning of Language Representations](https://arxiv.org/abs/1909.11942)
 
@@ -64,7 +69,7 @@ Release Notes
 Results
 =======
 
-Performance of ALBERT on GLUE benchmark results using a single-model setup on
+ALBERT在GLUE基准测试结果上使用单模型设置的性能 
 dev:
 
 | Models            | MNLI     | QNLI     | QQP      | RTE      | SST      | MRPC     | CoLA     | STS      |
@@ -75,7 +80,7 @@ dev:
 | ALBERT (1M)       | 90.4     | 95.2     | 92.0     | 88.1     | 96.8     | 90.2     | 68.7     | 92.7     |
 | ALBERT (1.5M)     | **90.8** | **95.3** | **92.2** | **89.2** | **96.9** | **90.9** | **71.4** | **93.0** |
 
-Performance of ALBERT-xxl on SQuaD and RACE benchmarks using a single-model
+使用单模型的ALBERT-xxl在SQuaD和RACE基准测试中的性能 
 setup:
 
 |Models                    | SQuAD1.1 dev  | SQuAD2.0 dev  | SQuAD2.0 test | RACE test (Middle/High) |
@@ -120,12 +125,11 @@ albert_outputs = albert_module(
 output_layer = albert_outputs["pooled_output"]
 ```
 
-Most of the fine-tuning scripts in this repository support TF-hub modules
-via the `--albert_hub_module_handle` flag.
+该repository中的大多数微调脚本都通过--albert_hub_module_handle标志来支持TF-hub模块。 
 
-Pre-training Instructions
+预训练设置
 =========================
-To pretrain ALBERT, use `run_pretraining.py`:
+要预训练ALBERT，请使用`run_pretraining.py`： 
 
 ```
 pip install -r albert/requirements.txt
@@ -149,12 +153,10 @@ python -m albert.run_pretraining \
 
 Fine-tuning on GLUE
 ===================
-To fine-tune and evaluate a pretrained ALBERT on GLUE, please see the
-convenience script `run_glue.sh`.
+要在GLUE上微调和评估经过预训练的ALBERT，请参见便捷脚本`run_glue.sh`。
 
-Lower-level use cases may want to use the `run_classifier.py` script directly.
-The `run_classifier.py` script is used both for fine-tuning and evaluation of
-ALBERT on individual GLUE benchmark tasks, such as MNLI:
+Lower-level用例可能要直接使用`run_classifier.py`脚本。
+`run_classifier.py`脚本用于微调和评估单个GLUE基准测试任务(例如MNLI)上的ALBERT： 
 
 ```
 pip install -r albert/requirements.txt
@@ -178,17 +180,13 @@ python -m albert.run_classifier \
   --train_batch_size=128
 ```
 
-Good default flag values for each GLUE task can be found in `run_glue.sh`.
+可以在`run_glue.sh` 中找到每个GLUE任务的默认标志值。 
 
-You can fine-tune the model starting from TF-Hub modules instead of raw
-checkpoints by setting e.g.
-`--albert_hub_module_handle=https://tfhub.dev/google/albert_base/1` instead
-of `--init_checkpoint`.
+您可以通过设置例如`--albert_hub_module_handle=https://tfhub.dev/google/albert_base/1` 使用TF-Hub模块, 而是原始checkpoint开始微调模型代替 `--init_checkpoint`.
 
-You can find the spm_model_file in the tar files or under the assets folder of
-the tf-hub module. The name of the model file is "30k-clean.model".
+您可以在tar文件或tf-hub模块的asset文件夹下找到spm_model_file。 模型文件的名称为“30k-clean.model”。
 
-After evaluation, the script should report some output like this:
+评估后，脚本应报告如下输出： 
 
 ```
 ***** Eval results *****
@@ -202,7 +200,7 @@ After evaluation, the script should report some output like this:
 
 Fine-tuning on SQuAD
 ====================
-To fine-tune and evaluate a pretrained model on SQuAD v1, use the
+要在SQuAD v1上微调和评估预训练模型，请使用 
 `run_squad_v1.py` script:
 
 ```
@@ -233,10 +231,9 @@ python -m albert.run_squad_v1 \
   --max_answer_length=30
 ```
 
-You can fine-tune the model starting from TF-Hub modules instead of raw
-checkpoints by setting e.g.
-`--albert_hub_module_handle=https://tfhub.dev/google/albert_base/1` instead
-of `--init_checkpoint`.
+您可以通过设置例如
+`--albert_hub_module_handle=https://tfhub.dev/google/albert_base/1` 
+ 从TF-Hub模块而不是`--init_checkpoint`原始checkpoint开始微调模型 
 
 For SQuAD v2, use the `run_squad_v2.py` script:
 
@@ -268,8 +265,7 @@ python -m albert.run_squad_v2 \
   --max_answer_length=30
 ```
 
-You can fine-tune the model starting from TF-Hub modules instead of raw
-checkpoints by setting e.g.
+You can fine-tune the model starting from TF-Hub modules instead of raw checkpoints by setting e.g.
 `--albert_hub_module_handle=https://tfhub.dev/google/albert_base/1` instead
 of `--init_checkpoint`.
 
@@ -306,7 +302,7 @@ of `--init_checkpoint`.
 
 SentencePiece
 =============
-Command for generating the sentence piece vocabulary:
+生成句子单词表的命令： 
 
 ```
 spm_train \
