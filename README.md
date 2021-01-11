@@ -12,7 +12,7 @@ v2 TF-Hub模型现在应该可以在TF 1.15上使用，因为我们从图中删�
 
 ***************New December 30, 2019 ***************
 
-中文模型发布。 感谢[CLUE team ](https://github.com/CLUEbenchmark/CLUE)提供的训练数据。是v1版本的。
+中文模型发布。 感谢[CLUE team ](https://github.com/CLUEbenchmark/CLUE)提供的训练数据。是v1版本的, 可以直接wget下载，👍!
 
 - [Base](https://storage.googleapis.com/albert_models/albert_base_zh.tar.gz)
 - [Large](https://storage.googleapis.com/albert_models/albert_large_zh.tar.gz)
