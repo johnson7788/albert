@@ -37,11 +37,11 @@ flags.DEFINE_string("input_file", None,
 
 flags.DEFINE_string(
     "output_file", None,
-    "输入出的TF文件，或者用冒号隔开的多个文件")
+    "输入出的TF文件，处理好的序列，用于模型训练，如果多个文件，请用冒号隔开的多个文件")
 
 flags.DEFINE_string(
     "vocab_file", None,
-    "ALBERT模型的单词表文件")
+    "需要使用的ALBERT模型的单词表文件")
 
 flags.DEFINE_string("spm_model_file", None,
                     "sentence piece tokenization的模型文件")
