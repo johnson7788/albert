@@ -222,7 +222,7 @@ python -m albert.run_classifier \
 
 您可以通过设置例如`--albert_hub_module_handle=https://tfhub.dev/google/albert_base/1` 使用TF-Hub模块, 而是原始checkpoint开始微调模型代替 `--init_checkpoint`.
 
-您可以在tar文件或tf-hub模块的asset文件夹下找到spm_model_file。 使用SentencePiece工具进行加注，模型文件的名称为“30k-clean.model”。
+您可以在tar文件或tf-hub模块的asset文件夹下找到spm_model_file。 使用SentencePiece工具进行加载，模型文件的名称为“30k-clean.model”。
 
 评估后，脚本应报告如下输出： 
 
